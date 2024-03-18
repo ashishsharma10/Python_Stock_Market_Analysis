@@ -44,3 +44,20 @@ def getCompanyNames():
         company_list.append(company['Company Name']) 
 
     return company_list
+
+def getSymbolFromName(name):
+    if(not name):
+        return False
+
+    # Load spreadsheet
+    xl = pd.read_excel('./data/NSE_COMPANIES_LIST.xlsx')
+    selectedCompanySymbol = ''
+
+    # convert xlsx data to object
+    companies_dictionaries = xl.to_dict(orient='records')
+    for company in companies_dictionaries:
+        if(company['Company Name'] == name):
+            selectedCompanySymbol = company['Symbol']
+            break
+
+    return selectedCompanySymbol

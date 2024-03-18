@@ -1,7 +1,7 @@
 import pandas as pd
 
 def formatInfo(data):
-    return (f'{data.info}').replace("'",'"')
+    return data.info
 
 def formatActions(data):
     df = data.actions 
