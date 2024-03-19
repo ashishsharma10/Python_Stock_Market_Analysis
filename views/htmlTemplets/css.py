@@ -12,10 +12,12 @@ css = """
     }
     
     .info-child{
-        padding: 1rem;
+        padding: 0.5rem;
         margin: 0.5rem;
         border-radius: 10px;
-        border: 1px solid
+        border: 0.5px solid;
+        display: flex;
+        justify-content: space-between;
     }
     
     .info-child .value{

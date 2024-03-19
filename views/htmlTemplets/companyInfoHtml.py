@@ -1,10 +1,20 @@
 from scripts import format_Mcap, format_recommendation
 
-def getCompanyBasicInfo(marketCap, currentPrice, lastDividendValue, sector, industry, dividendYield, volume, targetHighPrice, targetLowPrice, bookValue, returnOnEquity, recommendationKey):
+def getCompanyBasicInfo(companyInfo):
+    dividendYield = companyInfo.get('dividendYield')
+    marketCap = companyInfo.get('marketCap')
+    currentPrice = companyInfo.get('currentPrice')
+    returnOnEquity = companyInfo.get('returnOnEquity')
+    bookValue = companyInfo.get('bookValue')
+    recommendationKey = companyInfo.get('recommendationKey')
+    dayLow = companyInfo.get('dayLow')
+    dayHigh = companyInfo.get('dayHigh')
+    trailingPE = companyInfo.get('trailingPE')
+    forwardPE = companyInfo.get('forwardPE')
+    
     dividend_yield_percentage = f'{"{:.2f}".format(dividendYield * 100)}%' if dividendYield is not None else None
-    target_high_price = f'₹ {targetHighPrice}' if targetHighPrice is not None else None
-    target_low_price = f'₹ {targetLowPrice}' if targetLowPrice is not None else None
-    last_dividend_value = f'₹ {lastDividendValue}' if lastDividendValue is not None else None
+    trailing_PE = "{:.2f}".format(trailingPE) if trailingPE is not None else None
+    forward_PE = "{:.2f}".format(forwardPE) if forwardPE is not None else None
     return_on_equity = "{:.2f}".format(returnOnEquity * 100) if returnOnEquity is not None else None
     
     return f"""
@@ -16,8 +26,13 @@ def getCompanyBasicInfo(marketCap, currentPrice, lastDividendValue, sector, indu
       </div>
       
       <div class="info-child">
-        <p class='title'>Last Dividend:</p>
-        <p class='value'>{last_dividend_value}</p>
+      <p class='title'>Current Price:</p> 
+      <p class='value'>{currentPrice}</p>
+      </div>
+      
+      <div class="info-child">
+        <p class='title'>HIgh / Low:</p>
+        <p class='value'>{dayHigh} / {dayLow}</p>
       </div>
       
       <div class="info-child">
@@ -40,34 +55,15 @@ def getCompanyBasicInfo(marketCap, currentPrice, lastDividendValue, sector, indu
       <p class='value'>{format_recommendation(recommendationKey)}</p>
       </div>
       
-      <div class="info-child">
-      <p class='title'>Current Price:</p> 
-      <p class='value'>{currentPrice}</p>
-      </div>
-      
        <div class="info-child">
-      <p class='title'>Target High Price:</p> 
-      <p class='value'>{target_high_price}</p>
+      <p class='title'>Trailing PE:</p> 
+      <p class='value'>{trailing_PE}</p>
       </div>
 
       <div class="info-child">
-      <p class='title'>Target Low Price:</p>
-      <p class='value'>{target_low_price}</p>
+      <p class='title'>Forward PE:</p>
+      <p class='value'>{forward_PE}</p>
       </div>
-      
-      <div class="info-child">
-      <p class='title'>Sector: </p>
-      <p class='value'>{sector}</p>
-      </div>
-      
-      <div class="info-child">
-      <p class='title'>Industry: </p>
-      <p class='value'>{industry}</p>
-      </div>
-      
-      <div class="info-child">
-      <p class='title'>Volume: </p>
-      <p class='value'>{volume}</p>
-      </div>
+
     </div>
 """
